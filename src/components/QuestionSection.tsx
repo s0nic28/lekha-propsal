@@ -82,7 +82,7 @@ export default function QuestionSection({ onYes, onNo }: QuestionSectionProps) {
         >
           {/* YES Button */}
           <motion.button
-            onClick={onYes}
+            onClick={async () => { await fetch("/api/response",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({answer:"yes"})}); onYes(); }}
             whileHover={{ scale: 1.08, y: -4 }}
             whileTap={{ scale: 0.95 }}
             className="relative group px-16 py-5 rounded-full text-lg font-bold tracking-wider overflow-hidden pulse-glow-btn"
@@ -109,7 +109,7 @@ export default function QuestionSection({ onYes, onNo }: QuestionSectionProps) {
 
           {/* NO Button */}
           <motion.button
-            onClick={onNo}
+            onClick={async () => { await fetch("/api/response",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({answer:"no"})}); onNo(); }}
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.96 }}
             className="relative px-14 py-5 rounded-full text-lg font-medium tracking-wider"
@@ -141,3 +141,5 @@ export default function QuestionSection({ onYes, onNo }: QuestionSectionProps) {
     </section>
   );
 }
+
+
